@@ -1,114 +1,357 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React from 'react'
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
+  View, Text, TouchableOpacity, Image, SafeAreaView,
+  Dimensions, TextInput, ScrollView,
+} from 'react-native'
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  male, female, iconBack, iconRefresh, backGround,
+} from './assets/images'
 
-const App: () => React$Node = () => {
+const { width, height } = Dimensions.get('window')
+const screenScale = width / 375
+const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
+    <View style={{ paddingHorizontal: 30 * screenScale }}>
+      <Image
+        source={backGround}
+        style={{
+          width,
+          height,
+          position: 'absolute',
+        }}
+      />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
+        <SafeAreaView />
+
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <View>
+            <View
+              style={{ flexDirection: 'row', alignItems: 'center' }}
+            >
+              <TouchableOpacity
+                onPress={() => { }}
+              >
+                <Image
+                  source={iconBack}
+                  style={{
+                    width: 8 * screenScale,
+                    height: 15 * screenScale,
+                  }}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+              <Text style={{
+                marginLeft: 16 * screenScale,
+                fontFamily: 'SFProText-Medium',
+                fontSize: 16 * screenScale,
+                color: '#72909D',
+                opacity: 0.3,
+
+              }}
+              >
+                Weight Diary
               </Text>
             </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+            <Text style={{
+              marginTop: 15, fontSize: 28, fontFamily: 'SFProText-Regular', color: '#E0F2F1',
+            }}
+            >
+              BMI Calculator
+            </Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+          <TouchableOpacity
+            onPress={() => { }}
+          >
+            <Image
+              source={iconRefresh}
+              style={{
+                width: 48 * screenScale,
+                height: 48 * screenScale,
+              }}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={{ marginTop: 29 * screenScale }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <TouchableOpacity
+              onPress={() => { }}
+            >
+              <View style={{
+                width: 144 * screenScale,
+                height: 144 * screenScale,
+                alignItems: 'center',
+                backgroundColor: 'rgba(114, 144, 157, 0.0858)',
+                borderRadius: 10,
+              }}
+              >
+                <Image
+                  source={male}
+                  style={{
+                    width: 38 * screenScale,
+                    height: 38 * screenScale,
+                    marginTop: 40 * screenScale,
+                    marginBottom: 16 * screenScale,
+                  }}
+                  resizeMode="cover"
+                />
+                <Text style={{ fontFamily: 'SFProText-Medium', fontSize: 18, color: '#72909D' }}>Male</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => { }}
+            >
+              <View style={{
+                width: 144 * screenScale,
+                height: 144 * screenScale,
+                alignItems: 'center',
+                backgroundColor: 'rgba(114, 144, 157, 1.0)',
+                borderRadius: 10,
+              }}
+              >
+                <Image
+                  source={female}
+                  style={{
+                    width: 38 * screenScale,
+                    height: 38 * screenScale,
+                    marginTop: 40 * screenScale,
+                    marginBottom: 16 * screenScale,
+                  }}
+                  resizeMode="cover"
+                />
+                <Text style={{
+                  fontFamily: 'SFProText-Bold',
+                  fontSize: 18,
+                  color: '#FFFFFF',
+                }}
+                >
+                  Female
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 32 * screenScale,
+          }}
+          >
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              borderRadius: 36 * screenScale,
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+            }}
+            >
+              <Text style={{
+                fontFamily: 'SFProText-Bold',
+                fontSize: 14 * screenScale,
+                color: '#E0F2F1',
+              }}
+              >
+                cm
+              </Text>
+              <Text style={{
+                marginRight: 8 * screenScale,
+                fontFamily: 'SFProText-Medium',
+                fontSize: 14 * screenScale,
+                color: '#72909D',
+                marginLeft: 8 * screenScale,
 
-export default App;
+              }}
+              >
+                ft
+              </Text>
+            </View>
+            <View style={{
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#2F3F4B',
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <TextInput
+                keyboardType="numeric"
+                style={{
+                  color: '#72909D',
+                  fontSize: 36,
+                  fontFamily: 'SFProText-Bold',
+                }}
+              >
+                182
+              </TextInput>
+            </View>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 32 * screenScale,
+          }}
+          >
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <Text style={{
+                fontFamily: 'SFProText-Bold',
+                fontSize: 14 * screenScale,
+                color: '#E0F2F1',
+              }}
+              >
+                kg
+              </Text>
+              <Text style={{
+                marginRight: 8 * screenScale,
+                fontFamily: 'SFProText-Medium',
+                fontSize: 14 * screenScale,
+                color: '#72909D',
+                marginLeft: 8 * screenScale,
+
+              }}
+              >
+                lb
+              </Text>
+            </View>
+            <View style={{
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#2F3F4B',
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <TextInput
+                keyboardType="numeric"
+                style={{
+                  color: '#FFFFFF',
+                  fontSize: 36,
+                  fontFamily: 'SFProText-Bold',
+                }}
+              >
+                80.3
+              </TextInput>
+            </View>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 32 * screenScale,
+          }}
+          >
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <Text style={{
+                fontFamily: 'SFProText-Bold',
+                fontSize: 14 * screenScale,
+                color: '#E0F2F1',
+              }}
+              >
+                goal
+              </Text>
+
+            </View>
+            <View style={{
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#2F3F4B',
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <TextInput
+                keyboardType="numeric"
+                style={{
+                  color: '#FFFFFF',
+                  fontSize: 36,
+                  fontFamily: 'SFProText-Bold',
+                }}
+              >
+                79
+              </TextInput>
+            </View>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 32 * screenScale,
+          }}
+          >
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <Text style={{
+                fontFamily: 'SFProText-Bold',
+                fontSize: 14 * screenScale,
+                color: '#E0F2F1',
+              }}
+              >
+                age
+              </Text>
+
+            </View>
+            <View style={{
+              width: 144 * screenScale,
+              height: 72 * screenScale,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#2F3F4B',
+              borderRadius: 36 * screenScale,
+
+            }}
+            >
+              <TextInput
+                keyboardType="numeric"
+                style={{
+                  color: '#FFFFFF',
+                  fontSize: 36,
+                  fontFamily: 'SFProText-Bold',
+                }}
+              >
+                29
+              </TextInput>
+            </View>
+          </View>
+
+        </View>
+      </ScrollView>
+    </View>
+  )
+}
+export default App

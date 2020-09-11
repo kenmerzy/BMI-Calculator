@@ -1,0 +1,5 @@
+export const iconRefresh = require('./iconRefresh.png')
+export const male = require('./male.png')
+export const female = require('./female.png')
+export const iconBack = require('./iconBack.png')
+export const backGround = require('./background.png')
