@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View, Text, TouchableOpacity, Image, SafeAreaView,
-  Dimensions, TextInput, ScrollView,
+  Dimensions, TextInput, ScrollView, Modal,
 } from 'react-native'
 import {
-  male, female, iconBack, iconRefresh, backGround,
+  male, female, iconBack, iconRefresh, backGround, calculate_btn,
 } from './assets/images'
 
 const { width, height } = Dimensions.get('window')
 const screenScale = width / 375
+
 const App = () => {
+  const [heightValue, setheightValue] = useState(0)
+  const [weightValue, setWeightValue] = useState(0)
+  const [bmiValue, setBmiValue] = useState(0)
+  const [isModalBMIVisible, setIsModalBMIVisible] = useState(false)
+  const caculateBMI = () => {
+    const bmivl = weightValue / ((heightValue / 100) * (heightValue / 100))
+    setBmiValue(bmivl)
+    setIsModalBMIVisible(true)
+  }
+  
+  const [isFocusHeightInput, setIsFocusHeightInput] = useState(false)
+  const [isFocusWeightInput, setIsFocusWeightInput] = useState(false)
+
   return (
     <View style={{ paddingHorizontal: 30 * screenScale }}>
       <Image
@@ -25,10 +39,19 @@ const App = () => {
       >
         <SafeAreaView />
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingTop: 20 * screenScale,
+        }}
+        >
           <View>
             <View
-              style={{ flexDirection: 'row', alignItems: 'center' }}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center', 
+              }}
             >
               <TouchableOpacity
                 onPress={() => { }}
@@ -156,23 +179,12 @@ const App = () => {
               }}
               >
                 cm
-              </Text>
-              <Text style={{
-                marginRight: 8 * screenScale,
-                fontFamily: 'SFProText-Medium',
-                fontSize: 14 * screenScale,
-                color: '#72909D',
-                marginLeft: 8 * screenScale,
-
-              }}
-              >
-                ft
+                
               </Text>
             </View>
             <View style={{
               width: 144 * screenScale,
               height: 72 * screenScale,
-              alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#2F3F4B',
               borderRadius: 36 * screenScale,
@@ -181,14 +193,20 @@ const App = () => {
             >
               <TextInput
                 keyboardType="numeric"
+                value={heightValue}
+                onChangeText={(text) => { setheightValue(text) }}
+                textAlign="center"
+                maxLength={5}
+                placeholder="0"
+                placeholderTextColor="#72909D"
+                onFocus={() => { setIsFocusHeightInput(true) }}
+                onBlur={() => { setIsFocusHeightInput(false) }}
                 style={{
-                  color: '#72909D',
+                  color: isFocusHeightInput ? '#FFFFFF' : '#72909D',
                   fontSize: 36,
                   fontFamily: 'SFProText-Bold',
                 }}
-              >
-                182
-              </TextInput>
+              />
             </View>
           </View>
           <View style={{
@@ -216,22 +234,10 @@ const App = () => {
               >
                 kg
               </Text>
-              <Text style={{
-                marginRight: 8 * screenScale,
-                fontFamily: 'SFProText-Medium',
-                fontSize: 14 * screenScale,
-                color: '#72909D',
-                marginLeft: 8 * screenScale,
-
-              }}
-              >
-                lb
-              </Text>
             </View>
             <View style={{
               width: 144 * screenScale,
               height: 72 * screenScale,
-              alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#2F3F4B',
               borderRadius: 36 * screenScale,
@@ -240,117 +246,117 @@ const App = () => {
             >
               <TextInput
                 keyboardType="numeric"
+                value={weightValue}
+                onChangeText={(text) => { setWeightValue(text) }}
+                textAlign="center"
+                maxLength={5}
+                placeholder="0"
+                placeholderTextColor="#72909D"
+                onFocus={() => { setIsFocusWeightInput(true) }}
+                onBlur={() => { setIsFocusWeightInput(false) }}
                 style={{
-                  color: '#FFFFFF',
+                  color: isFocusWeightInput ? '#FFFFFF' : '#72909D',
                   fontSize: 36,
                   fontFamily: 'SFProText-Bold',
                 }}
-              >
-                80.3
-              </TextInput>
-            </View>
-          </View>
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 32 * screenScale,
-          }}
-          >
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 144 * screenScale,
-              height: 72 * screenScale,
-              borderRadius: 36 * screenScale,
-
-            }}
-            >
-              <Text style={{
-                fontFamily: 'SFProText-Bold',
-                fontSize: 14 * screenScale,
-                color: '#E0F2F1',
-              }}
-              >
-                goal
-              </Text>
-
-            </View>
-            <View style={{
-              width: 144 * screenScale,
-              height: 72 * screenScale,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#2F3F4B',
-              borderRadius: 36 * screenScale,
-
-            }}
-            >
-              <TextInput
-                keyboardType="numeric"
-                style={{
-                  color: '#FFFFFF',
-                  fontSize: 36,
-                  fontFamily: 'SFProText-Bold',
-                }}
-              >
-                79
-              </TextInput>
-            </View>
-          </View>
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 32 * screenScale,
-          }}
-          >
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 144 * screenScale,
-              height: 72 * screenScale,
-              borderRadius: 36 * screenScale,
-
-            }}
-            >
-              <Text style={{
-                fontFamily: 'SFProText-Bold',
-                fontSize: 14 * screenScale,
-                color: '#E0F2F1',
-              }}
-              >
-                age
-              </Text>
-
-            </View>
-            <View style={{
-              width: 144 * screenScale,
-              height: 72 * screenScale,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#2F3F4B',
-              borderRadius: 36 * screenScale,
-
-            }}
-            >
-              <TextInput
-                keyboardType="numeric"
-                style={{
-                  color: '#FFFFFF',
-                  fontSize: 36,
-                  fontFamily: 'SFProText-Bold',
-                }}
-              >
-                29
-              </TextInput>
+              />
             </View>
           </View>
 
         </View>
       </ScrollView>
+      
+      <TouchableOpacity
+        onPress={caculateBMI}
+      >
+        <View style={{
+        
+          marginTop: 40 * screenScale,
+        }}
+        >
+          <Image
+            source={calculate_btn}
+            style={{
+              width: 320 * screenScale,
+              height: 54 * screenScale,
+              borderRadius: 27 * screenScale,
+            }}
+            resizeMode="contain"
+          />
+        </View>
+      </TouchableOpacity>
+      <Modal
+        visible={isModalBMIVisible}
+        animationType="slide"
+        transparent
+      >
+        <View style={{
+          flex: 1,
+          backgroundColor: 'rgba(36, 50, 61,1)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          opacity: 0.9,
+        }}
+        >
+          <View style={{
+            backgroundColor: '#72909D',
+            borderRadius: 10 * screenScale,
+            width: 45 * screenScale,
+            height: 45 * screenScale,
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            right: 32 * screenScale,
+            top: 32 * screenScale,
+        
+          }}
+          >
+            <TouchableOpacity
+              onPress={() => { setIsModalBMIVisible(false) }}
+            >
+              <Text
+                style={{
+                  fontFamily: 'SFProText-Bold',
+                  fontSize: 20 * screenScale,
+                  color: '#FFFFFF', 
+                  textAlign: 'center',
+                  
+                }}
+              >
+                X
+              </Text>
+              
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            width: 250 * screenScale,
+            height: 250 * screenScale,
+            borderRadius: 20 * screenScale,
+            backgroundColor: '#72909D',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          >
+            <Text style={{
+              fontFamily: 'SFProText-Bold',
+              fontSize: 36 * screenScale,
+              color: '#FFFFFF', 
+            }}
+            >
+              Your BMI
+            </Text>
+            <Text style={{
+              fontFamily: 'SFProText-Bold',
+              fontSize: 72 * screenScale,
+              color: '#FFFFFF', 
+            }}
+            >
+              {bmiValue.toFixed(1)}
+            </Text>
+          </View>
+        </View>
+       
+      </Modal>
     </View>
   )
 }
