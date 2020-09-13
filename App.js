@@ -11,9 +11,15 @@ const { width, height } = Dimensions.get('window')
 const screenScale = width / 375
 
 const App = () => {
-  const [heightValue, setheightValue] = useState(0)
+  const [heightValue, setheightValue] = useState(1)
   const [weightValue, setWeightValue] = useState(0)
   const [bmiValue, setBmiValue] = useState(0)
+  const [isMale, setIsMale] = useState(true)
+  const restart = () => {
+    // eslint-disable-next-line no-unused-expressions
+    setheightValue(1)
+    setWeightValue(0)
+  }
   const [isModalBMIVisible, setIsModalBMIVisible] = useState(false)
   const caculateBMI = () => {
     const bmivl = weightValue / ((heightValue / 100) * (heightValue / 100))
@@ -78,14 +84,17 @@ const App = () => {
               </Text>
             </View>
             <Text style={{
-              marginTop: 15, fontSize: 28, fontFamily: 'SFProText-Regular', color: '#E0F2F1',
+              marginTop: 15,
+              fontSize: 28,
+              fontFamily: 'SFProText-Regular',
+              color: '#E0F2F1',
             }}
             >
               BMI Calculator
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={restart}
           >
             <Image
               source={iconRefresh}
@@ -100,14 +109,14 @@ const App = () => {
         <View style={{ marginTop: 29 * screenScale }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <TouchableOpacity
-              onPress={() => { }}
+              onPress={() => { setIsMale(true) }}
             >
               <View style={{
                 width: 144 * screenScale,
                 height: 144 * screenScale,
                 alignItems: 'center',
-                backgroundColor: 'rgba(114, 144, 157, 0.0858)',
-                borderRadius: 10,
+                backgroundColor: isMale ? 'rgba(114, 144, 157, 1.0)' : 'rgba(114, 144, 157, 0.0858)',
+                borderRadius: 10 * screenScale,
               }}
               >
                 <Image
@@ -117,20 +126,28 @@ const App = () => {
                     height: 38 * screenScale,
                     marginTop: 40 * screenScale,
                     marginBottom: 16 * screenScale,
+                    tintColor: isMale ? '#FFFFFF' : '#72909D',
                   }}
                   resizeMode="cover"
                 />
-                <Text style={{ fontFamily: 'SFProText-Medium', fontSize: 18, color: '#72909D' }}>Male</Text>
+                <Text style={{
+                  fontFamily: 'SFProText-Medium',
+                  fontSize: 18,
+                  color: isMale ? '#FFFFFF' : '#72909D', 
+                }}
+                >
+                  Male
+                </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => { }}
+              onPress={() => { setIsMale(false) }}
             >
               <View style={{
                 width: 144 * screenScale,
                 height: 144 * screenScale,
                 alignItems: 'center',
-                backgroundColor: 'rgba(114, 144, 157, 1.0)',
+                backgroundColor: isMale ? 'rgba(114, 144, 157, 0.0858)' : 'rgba(114, 144, 157, 1.0)',
                 borderRadius: 10,
               }}
               >
@@ -141,13 +158,14 @@ const App = () => {
                     height: 38 * screenScale,
                     marginTop: 40 * screenScale,
                     marginBottom: 16 * screenScale,
+                    tintColor: isMale ? '#72909D' : '#FFFFFF',
                   }}
                   resizeMode="cover"
                 />
                 <Text style={{
                   fontFamily: 'SFProText-Bold',
                   fontSize: 18,
-                  color: '#FFFFFF',
+                  color: isMale ? '#72909D' : '#FFFFFF',
                 }}
                 >
                   Female
